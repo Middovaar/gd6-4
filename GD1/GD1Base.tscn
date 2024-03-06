@@ -1,0 +1,293 @@
+[gd_scene load_steps=32 format=3 uid="uid://brc4ktm1d2o1a"]
+
+[ext_resource type="Script" path="res://GD1/Scripts/base.gd" id="1_g0nql"]
+[ext_resource type="Texture2D" uid="uid://1m35ceysqxoh" path="res://GD1/Sprites/Background/testiber.png" id="1_soso2"]
+[ext_resource type="Script" path="res://GD1/Scripts/Game.gd" id="2_4dnow"]
+[ext_resource type="Texture2D" uid="uid://62tbh31d6pyi" path="res://GD1/Sprites/Knights/knight 1.png" id="2_hr8oo"]
+[ext_resource type="FontFile" uid="uid://bwim6iqv6ytje" path="res://GD1/Sprites/Font/motaiwan.ttf" id="2_hvia5"]
+[ext_resource type="Script" path="res://GD1/Scripts/TopRowUI.gd" id="2_klq0x"]
+[ext_resource type="Script" path="res://GD1/Scripts/Timer.gd" id="3_crd6x"]
+[ext_resource type="Script" path="res://GD1/Scripts/KnightPlayer.gd" id="3_g52xb"]
+[ext_resource type="Texture2D" uid="uid://dwrcsl0s6yjep" path="res://GD1/Sprites/Knights/shield 1.png" id="4_jyn35"]
+[ext_resource type="Script" path="res://GD1/Scripts/PlayerWeapon.gd" id="5_vvlym"]
+[ext_resource type="Texture2D" uid="uid://bhw0vsawlu3pv" path="res://GD1/Sprites/Knights/sword 1.png" id="6_8l7x4"]
+[ext_resource type="Texture2D" uid="uid://baeu1gjb030xb" path="res://GD1/Sprites/Knights/knight 2.png" id="7_jsgsi"]
+[ext_resource type="Script" path="res://GD1/Scripts/OpponentPlayer.gd" id="8_dvr2q"]
+[ext_resource type="Texture2D" uid="uid://bqtw4ecv5nfgy" path="res://GD1/Sprites/Knights/shield 2.png" id="9_ga1hy"]
+[ext_resource type="Script" path="res://GD1/Scripts/OpponentWeapon.gd" id="9_gdhoo"]
+[ext_resource type="Texture2D" uid="uid://b0xisxqtvf73v" path="res://GD1/Sprites/Knights/sword 2.png" id="11_w0c3g"]
+[ext_resource type="Texture2D" uid="uid://dsdb482td5ueb" path="res://GD1/Sprites/Knights/knight1 left hand.png" id="12_kd2f8"]
+[ext_resource type="Texture2D" uid="uid://lr5spc1od85w" path="res://GD1/Sprites/Knights/knight2 right hand.png" id="17_exwkx"]
+[ext_resource type="AudioStream" uid="uid://2ba4tcfdkppy" path="res://GD1/Sounds/change sword position.wav" id="18_8rq7s"]
+[ext_resource type="Script" path="res://GD1/Scripts/AudioLane1.gd" id="19_nwwnp"]
+[ext_resource type="AudioStream" uid="uid://cmgyi6mmcdclu" path="res://GD1/Sounds/ShieldMove.wav" id="20_lg0d4"]
+[ext_resource type="AudioStream" uid="uid://ctjbrtjakebqf" path="res://GD1/Sounds/sword hits knight.wav" id="21_hwmn4"]
+[ext_resource type="AudioStream" uid="uid://hpbiukf7xo5d" path="res://GD1/Sounds/sword hits shield.wav" id="22_ijjkq"]
+[ext_resource type="AudioStream" uid="uid://ckq3mnkglr4wn" path="res://GD1/Sounds/sword hits sword.wav" id="23_7uiwy"]
+[ext_resource type="AudioStream" uid="uid://c3ru1gqqe6pv1" path="res://GD1/Sounds/PointsGivenNotTaken.wav" id="24_4hbph"]
+[ext_resource type="AudioStream" uid="uid://btd5cp6f7merp" path="res://GD1/Sounds/PointsTaken.wav" id="25_2v87p"]
+[ext_resource type="AudioStream" uid="uid://bq2kng3nol174" path="res://GD1/Sounds/PointsGiven.wav" id="26_i7j7q"]
+[ext_resource type="Script" path="res://GD1/Scripts/PauseMenu.gd" id="27_ydc0w"]
+[ext_resource type="Texture2D" uid="uid://31w7ptpw5yca" path="res://GD1/Sprites/Background/PausedScreen.png" id="28_2kmld"]
+[ext_resource type="AudioStream" uid="uid://huk70ubs8x77" path="res://GD1/Sounds/menuopen.wav" id="29_cuqoi"]
+[ext_resource type="AudioStream" uid="uid://dhlq88diur7u7" path="res://GD1/Sounds/Game Music.wav" id="30_h00q4"]
+
+[node name="Base" type="Node2D"]
+script = ExtResource("1_g0nql")
+
+[node name="Background" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="BackgroundTexture" type="TextureRect" parent="Background"]
+layout_mode = 2
+texture = ExtResource("1_soso2")
+
+[node name="FullscreenDivider" type="VBoxContainer" parent="Background"]
+layout_mode = 2
+
+[node name="TopRowUI" type="HBoxContainer" parent="Background/FullscreenDivider"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+script = ExtResource("2_klq0x")
+
+[node name="PlayerEmpty" type="MarginContainer" parent="Background/FullscreenDivider/TopRowUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerScoreCont" type="MarginContainer" parent="Background/FullscreenDivider/TopRowUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 65
+
+[node name="PlayerScore" type="RichTextLabel" parent="Background/FullscreenDivider/TopRowUI/PlayerScoreCont"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_font = ExtResource("2_hvia5")
+theme_override_fonts/italics_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_italics_font = ExtResource("2_hvia5")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]0[/center][/bgcolor]"
+
+[node name="OpponentScoreCont" type="MarginContainer" parent="Background/FullscreenDivider/TopRowUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 65
+
+[node name="OpponentScore" type="RichTextLabel" parent="Background/FullscreenDivider/TopRowUI/OpponentScoreCont"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_font = ExtResource("2_hvia5")
+theme_override_fonts/italics_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_italics_font = ExtResource("2_hvia5")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]0[/center][/bgcolor]"
+
+[node name="OpponentEmpty" type="MarginContainer" parent="Background/FullscreenDivider/TopRowUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameSpace" type="MarginContainer" parent="Background/FullscreenDivider"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 850
+
+[node name="Timer" type="RichTextLabel" parent="Background/FullscreenDivider/GameSpace"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_font = ExtResource("2_hvia5")
+theme_override_fonts/italics_font = ExtResource("2_hvia5")
+theme_override_fonts/bold_italics_font = ExtResource("2_hvia5")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]5[/center][/bgcolor]"
+script = ExtResource("3_crd6x")
+
+[node name="Game" type="Node2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+script = ExtResource("2_4dnow")
+
+[node name="OpponentPlayer" type="Sprite2D" parent="Game"]
+position = Vector2(1800, 790)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_hr8oo")
+script = ExtResource("8_dvr2q")
+
+[node name="OpponentShield" type="Sprite2D" parent="Game/OpponentPlayer"]
+position = Vector2(150, 200)
+rotation = 3.14159
+texture = ExtResource("4_jyn35")
+script = ExtResource("9_gdhoo")
+WeaponPositionHigh = -1.0
+ThisIsA = &"Shield"
+
+[node name="OpponentSword" type="Sprite2D" parent="Game/OpponentPlayer"]
+unique_name_in_owner = true
+position = Vector2(-440, -170)
+rotation = 3.14159
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("6_8l7x4")
+script = ExtResource("9_gdhoo")
+WeaponPositionHigh = 1.0
+ThisIsA = &"Sword"
+
+[node name="OpponentSwordArm" type="Sprite2D" parent="Game/OpponentPlayer/OpponentSword"]
+position = Vector2(-215.278, 2.77722)
+rotation = -1.57079
+scale = Vector2(0.833333, 0.833333)
+texture = ExtResource("12_kd2f8")
+
+[node name="KnightPlayer" type="Sprite2D" parent="Game"]
+position = Vector2(900, 790)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("7_jsgsi")
+script = ExtResource("3_g52xb")
+
+[node name="PlayerShield" type="Sprite2D" parent="Game/KnightPlayer"]
+position = Vector2(-150, 200)
+texture = ExtResource("9_ga1hy")
+script = ExtResource("5_vvlym")
+WeaponPositionHigh = -1.0
+ThisIsA = &"Shield"
+
+[node name="PlayerSword" type="Sprite2D" parent="Game/KnightPlayer"]
+unique_name_in_owner = true
+position = Vector2(440, -170)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("11_w0c3g")
+script = ExtResource("5_vvlym")
+WeaponPositionHigh = 1.0
+ThisIsA = &"Sword"
+
+[node name="OpponentSwordArm2" type="Sprite2D" parent="Game/KnightPlayer/PlayerSword"]
+position = Vector2(-169.17, -2.37154)
+rotation = -1.5708
+scale = Vector2(0.948617, 0.948617)
+texture = ExtResource("17_exwkx")
+
+[node name="PauseMenu" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("27_ydc0w")
+
+[node name="PausedScreen" type="Sprite2D" parent="PauseMenu"]
+position = Vector2(1280, 720)
+texture = ExtResource("28_2kmld")
+
+[node name="SwordSounds" type="Node" parent="."]
+
+[node name="SwordChangePosAudio" type="AudioStreamPlayer" parent="SwordSounds"]
+unique_name_in_owner = true
+stream = ExtResource("18_8rq7s")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="ShieldChangePosAudio" type="AudioStreamPlayer" parent="SwordSounds"]
+unique_name_in_owner = true
+stream = ExtResource("20_lg0d4")
+volume_db = -10.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="SwordHitsKnight" type="AudioStreamPlayer" parent="SwordSounds"]
+unique_name_in_owner = true
+stream = ExtResource("21_hwmn4")
+volume_db = -10.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="SwordHitsShield" type="AudioStreamPlayer" parent="SwordSounds"]
+unique_name_in_owner = true
+stream = ExtResource("22_ijjkq")
+volume_db = -10.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="SwordHitsSword" type="AudioStreamPlayer" parent="SwordSounds"]
+unique_name_in_owner = true
+stream = ExtResource("23_7uiwy")
+volume_db = -10.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="PointSounds" type="Node" parent="."]
+
+[node name="PointPlayer" type="AudioStreamPlayer" parent="PointSounds"]
+unique_name_in_owner = true
+stream = ExtResource("24_4hbph")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="PointOpponent" type="AudioStreamPlayer" parent="PointSounds"]
+unique_name_in_owner = true
+stream = ExtResource("25_2v87p")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="PointBoth" type="AudioStreamPlayer" parent="PointSounds"]
+unique_name_in_owner = true
+stream = ExtResource("26_i7j7q")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="MenuSounds" type="Node" parent="."]
+
+[node name="MenuOpenDismiss" type="AudioStreamPlayer" parent="MenuSounds"]
+unique_name_in_owner = true
+stream = ExtResource("29_cuqoi")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="MenuSounds"]
+unique_name_in_owner = true
+stream = ExtResource("30_h00q4")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("19_nwwnp")
+
+[connection signal="HigherOrderPause" from="." to="Background/FullscreenDivider/GameSpace/Timer" method="_on_base_higher_order_pause"]
+[connection signal="HigherOrderPause" from="." to="Game/OpponentPlayer" method="_on_base_higher_order_pause"]
+[connection signal="HigherOrderPause" from="." to="Game/KnightPlayer" method="_on_base_higher_order_pause"]
+[connection signal="IsNotPaused" from="Background/FullscreenDivider/GameSpace/Timer" to="PauseMenu" method="_on_timer_is_not_paused"]
+[connection signal="IsPaused" from="Background/FullscreenDivider/GameSpace/Timer" to="PauseMenu" method="_on_timer_is_paused"]
+[connection signal="NewRound" from="Background/FullscreenDivider/GameSpace/Timer" to="Game/OpponentPlayer" method="_on_timer_new_round"]
+[connection signal="NewRound" from="Background/FullscreenDivider/GameSpace/Timer" to="Game/KnightPlayer" method="_on_timer_new_round"]
+[connection signal="RoundCommit" from="Background/FullscreenDivider/GameSpace/Timer" to="Game/OpponentPlayer" method="_on_timer_round_commit"]
+[connection signal="RoundCommit" from="Background/FullscreenDivider/GameSpace/Timer" to="Game/KnightPlayer" method="_on_timer_round_commit"]
+[connection signal="ScoreSender" from="Game" to="Background/FullscreenDivider/TopRowUI" method="_on_game_score_sender"]
+[connection signal="ScoreSender" from="Game" to="Game/OpponentPlayer" method="_on_game_score_sender"]
+[connection signal="ScoreSender" from="Game" to="Game/KnightPlayer" method="_on_game_score_sender"]
+[connection signal="TimerConfiguration" from="Game" to="Background/FullscreenDivider/GameSpace/Timer" method="_TimerCycler"]
+[connection signal="PositionShift" from="Game/OpponentPlayer" to="Game/OpponentPlayer/OpponentShield" method="_on_opponent_player_position_shift"]
+[connection signal="PositionShift" from="Game/OpponentPlayer" to="Game/OpponentPlayer/OpponentSword" method="_on_opponent_player_position_shift"]
+[connection signal="RoundFinishIsAtPosition" from="Game/OpponentPlayer" to="Game" method="_on_opponent_player_round_finish_is_at_position"]
+[connection signal="PositionShift" from="Game/KnightPlayer" to="Game/KnightPlayer/PlayerShield" method="_on_knight_player_position_shift"]
+[connection signal="PositionShift" from="Game/KnightPlayer" to="Game/KnightPlayer/PlayerSword" method="_on_knight_player_position_shift"]
+[connection signal="RoundFinishIsAtPosition" from="Game/KnightPlayer" to="Game" method="_on_knight_player_round_finish_is_at_position"]

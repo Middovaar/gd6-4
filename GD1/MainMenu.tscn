@@ -1,0 +1,277 @@
+[gd_scene load_steps=21 format=3 uid="uid://16ah2h5qkowx"]
+
+[ext_resource type="Script" path="res://GD1/Scripts/MainMenu/MainMenu.gd" id="1_kckfj"]
+[ext_resource type="Texture2D" uid="uid://ccl0fvne61hg6" path="res://GD1/Sprites/Background/start.png" id="1_l50nf"]
+[ext_resource type="FontFile" uid="uid://bwim6iqv6ytje" path="res://GD1/Sprites/Font/motaiwan.ttf" id="2_uxxm8"]
+[ext_resource type="Script" path="res://GD1/Scripts/MainMenu/MenuButtons.gd" id="3_2ikhf"]
+[ext_resource type="Texture2D" uid="uid://boy4i23ty4hjx" path="res://GD1/Sprites/StartMenuAnimation/Player.png" id="3_mjxxm"]
+[ext_resource type="Texture2D" uid="uid://b06k3fdy3pviq" path="res://GD1/Sprites/StartMenuAnimation/Player2.png" id="4_p8vcd"]
+[ext_resource type="Script" path="res://GD1/Scripts/MainMenu/LetPlayer.gd" id="5_3nlf5"]
+[ext_resource type="Texture2D" uid="uid://u4wqcgoavveg" path="res://GD1/Sprites/StartMenuAnimation/Opponent.png" id="5_h782v"]
+[ext_resource type="Texture2D" uid="uid://bi0sxhqufhrks" path="res://GD1/Sprites/StartMenuAnimation/Opponent2.png" id="6_gyyg2"]
+[ext_resource type="Script" path="res://GD1/Scripts/MainMenu/LetOpponent.gd" id="8_kb7eh"]
+[ext_resource type="AudioStream" uid="uid://huk70ubs8x77" path="res://GD1/Sounds/menuopen.wav" id="10_2pkc0"]
+[ext_resource type="Script" path="res://GD1/Scripts/AudioLane1.gd" id="11_5q2af"]
+[ext_resource type="AudioStream" uid="uid://djdq7jloptvdw" path="res://GD1/Sounds/MainMenu Music.wav" id="12_41hfv"]
+[ext_resource type="AudioStream" uid="uid://bq2kng3nol174" path="res://GD1/Sounds/PointsGiven.wav" id="14_je03d"]
+[ext_resource type="AudioStream" uid="uid://ctjbrtjakebqf" path="res://GD1/Sounds/sword hits knight.wav" id="15_y1mag"]
+[ext_resource type="AudioStream" uid="uid://w1tefuq6yo3o" path="res://GD1/Sounds/click sound.wav" id="16_qrxe8"]
+[ext_resource type="Texture2D" uid="uid://dqakkix5m1key" path="res://GD1/Sprites/StartMenuAnimation/blackfader.png" id="17_l32fp"]
+[ext_resource type="Script" path="res://GD1/Scripts/MainMenu/Blackfader.gd" id="18_p84sx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ada4n"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mjxxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p8vcd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqgqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_h782v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gyyg2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_kckfj")
+
+[node name="Start" type="Sprite2D" parent="."]
+position = Vector2(1280, 720)
+texture = ExtResource("1_l50nf")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OpponentScore" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.26
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_font = ExtResource("2_uxxm8")
+theme_override_fonts/italics_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_italics_font = ExtResource("2_uxxm8")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][bgcolor=#0000009f][center]The Joustings[/center][/bgcolor][/wave]"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.05
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.6
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.45
+theme_override_constants/separation = 0
+
+[node name="Play" type="RichTextLabel" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.03
+mouse_default_cursor_shape = 2
+theme_override_fonts/normal_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_font = ExtResource("2_uxxm8")
+theme_override_fonts/italics_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_italics_font = ExtResource("2_uxxm8")
+theme_override_font_sizes/normal_font_size = 135
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]PLAY[/center][/bgcolor]"
+script = ExtResource("3_2ikhf")
+ButtonName = "play"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Controls" type="RichTextLabel" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/normal_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_font = ExtResource("2_uxxm8")
+theme_override_fonts/italics_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_italics_font = ExtResource("2_uxxm8")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]Controls[/center][/bgcolor]"
+script = ExtResource("3_2ikhf")
+ButtonName = "controls"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Exit" type="RichTextLabel" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.86
+mouse_default_cursor_shape = 2
+theme_override_fonts/normal_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_font = ExtResource("2_uxxm8")
+theme_override_fonts/italics_font = ExtResource("2_uxxm8")
+theme_override_fonts/bold_italics_font = ExtResource("2_uxxm8")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[bgcolor=#0000009f][center]Exit[/center][/bgcolor]"
+script = ExtResource("3_2ikhf")
+ButtonName = "exit"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.42
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(730, 810)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ada4n")
+frame_progress = 0.579943
+script = ExtResource("5_3nlf5")
+
+[node name="Opponent" type="AnimatedSprite2D" parent="."]
+position = Vector2(1830, 810)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_qqgqe")
+frame_progress = 0.884756
+script = ExtResource("8_kb7eh")
+
+[node name="MenuSounds" type="Node" parent="."]
+
+[node name="MenuOpenDismiss" type="AudioStreamPlayer" parent="MenuSounds"]
+unique_name_in_owner = true
+stream = ExtResource("10_2pkc0")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="MenuSounds"]
+unique_name_in_owner = true
+stream = ExtResource("12_41hfv")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="ButtonClickSounds" type="Node" parent="."]
+
+[node name="PlayClick" type="AudioStreamPlayer" parent="ButtonClickSounds"]
+unique_name_in_owner = true
+stream = ExtResource("14_je03d")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="PlayClick2" type="AudioStreamPlayer" parent="ButtonClickSounds"]
+unique_name_in_owner = true
+stream = ExtResource("15_y1mag")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="ControlClick" type="AudioStreamPlayer" parent="ButtonClickSounds"]
+unique_name_in_owner = true
+stream = ExtResource("16_qrxe8")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="ExitClick" type="AudioStreamPlayer" parent="ButtonClickSounds"]
+unique_name_in_owner = true
+stream = ExtResource("16_qrxe8")
+volume_db = -12.0
+max_polyphony = 6
+script = ExtResource("11_5q2af")
+
+[node name="Blackfader" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(1280, 706)
+scale = Vector2(1, 1.02)
+texture = ExtResource("17_l32fp")
+script = ExtResource("18_p84sx")
+
+[connection signal="DesireFader" from="." to="Blackfader" method="_on_main_menu_desire_fader"]
+[connection signal="ButtonPressed" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Play" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Play" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Play" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Play" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Play" method="_on_mouse_exited"]
+[connection signal="ButtonPressed" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Controls" to="." method="_on_controls_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Controls" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Controls" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Controls" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Controls" method="_on_mouse_exited"]
+[connection signal="ButtonPressed" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Exit" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Exit" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Exit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer2/VBoxContainer/HBoxContainer/Options/Exit" to="MarginContainer2/VBoxContainer/HBoxContainer/Options/Exit" method="_on_mouse_exited"]
+[connection signal="FaderDone" from="Blackfader" to="." method="_on_blackfader_fader_done"]

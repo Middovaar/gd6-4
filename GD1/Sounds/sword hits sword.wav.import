@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckq3mnkglr4wn"
+path="res://.godot/imported/sword hits sword.wav-48dc2331dcf02ef67967d934f17b7c60.sample"
+
+[deps]
+
+source_file="res://GD1/Sounds/sword hits sword.wav"
+dest_files=["res://.godot/imported/sword hits sword.wav-48dc2331dcf02ef67967d934f17b7c60.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

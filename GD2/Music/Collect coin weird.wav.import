@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://blaqfmjdj7hob"
+path="res://.godot/imported/Collect coin weird.wav-cbd340a2f768ed1af11396efedb5c1b8.sample"
+
+[deps]
+
+source_file="res://GD2/Music/Collect coin weird.wav"
+dest_files=["res://.godot/imported/Collect coin weird.wav-cbd340a2f768ed1af11396efedb5c1b8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

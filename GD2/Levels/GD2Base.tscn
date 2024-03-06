@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://ggi8two8tdxy"]
+
+[ext_resource type="PackedScene" uid="uid://dtf4vym6kl45p" path="res://GD2/Levels/NormalLevel.res" id="1_gk12y"]
+[ext_resource type="Script" path="res://GD2/Scripts/Base.gd" id="1_w4hsi"]
+[ext_resource type="Script" path="res://GD2/Scripts/Character/Character.gd" id="2_y8qbf"]
+[ext_resource type="Texture2D" uid="uid://b3qpt6gl0ooif" path="res://GD2/Sprites/Character.png" id="4_yk51f"]
+[ext_resource type="AudioStream" uid="uid://75dcgaxubhx1" path="res://GD2/Music/Jump.wav" id="5_2e8nq"]
+[ext_resource type="Script" path="res://GD2/Scripts/JumpSound.gd" id="6_6n3ri"]
+[ext_resource type="AudioStream" uid="uid://ta41042sylsi" path="res://GD2/Music/jump weird.wav" id="7_6wxtx"]
+[ext_resource type="Script" path="res://GD2/Scripts/WierdJumpSound.gd" id="8_birc4"]
+[ext_resource type="AudioStream" uid="uid://dto1il5cdkepx" path="res://GD2/Music/Run.wav" id="9_dyj7n"]
+[ext_resource type="Script" path="res://GD2/Scripts/RunningSound.gd" id="10_t8pha"]
+[ext_resource type="AudioStream" uid="uid://d3ommfd6pwy34" path="res://GD2/Music/run weird.wav" id="11_2aqyb"]
+[ext_resource type="Script" path="res://GD2/Scripts/WierdRunningSound.gd" id="12_v1thp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj6sr"]
+size = Vector2(140, 304.444)
+
+[node name="Base" type="Node2D"]
+script = ExtResource("1_w4hsi")
+
+[node name="NormalLevel" parent="." instance=ExtResource("1_gk12y")]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 7
+script = ExtResource("2_y8qbf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(189.5, 849)
+scale = Vector2(0.45, 0.45)
+shape = SubResource("RectangleShape2D_vj6sr")
+
+[node name="Character" type="Sprite2D" parent="Player/CollisionShape2D"]
+unique_name_in_owner = true
+scale = Vector2(0.422222, 0.388889)
+texture = ExtResource("4_yk51f")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2e8nq")
+volume_db = -12.0
+script = ExtResource("6_6n3ri")
+
+[node name="WierdJumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6wxtx")
+volume_db = -12.0
+script = ExtResource("8_birc4")
+
+[node name="RunningSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_dyj7n")
+volume_db = -50.0
+autoplay = true
+script = ExtResource("10_t8pha")
+
+[node name="WierdRunningSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_2aqyb")
+volume_db = -50.0
+autoplay = true
+script = ExtResource("12_v1thp")
+
+[connection signal="SpikeLevelChange" from="NormalLevel" to="." method="_on_normal_level_spike_level_change"]
+[connection signal="JumpSound" from="Player" to="JumpSound" method="_on_player_jump_sound"]
+[connection signal="LevelChanger" from="Player" to="." method="_on_level_changer"]
+[connection signal="PlayerPositioninX" from="Player" to="NormalLevel" method="_on_player_positionin_x"]
+[connection signal="RunningSound" from="Player" to="RunningSound" method="_on_player_running_sound"]
+[connection signal="SpikesLevelChanger" from="Player" to="." method="_on_player_spikes_level_changer"]
+[connection signal="StopRunning" from="Player" to="RunningSound" method="_on_player_stop_running"]
+[connection signal="StopRunning" from="Player" to="WierdRunningSound" method="_on_player_stop_running"]
+[connection signal="WhatLevelToQueueFree" from="Player" to="." method="_on_what_level_to_queue_free"]
+[connection signal="WierdJumpSound" from="Player" to="WierdJumpSound" method="_on_player_wierd_jump_sound"]
+[connection signal="WierdRunningSound" from="Player" to="WierdRunningSound" method="_on_player_wierd_running_sound"]
+[connection signal="finished" from="RunningSound" to="." method="_on_running_sound_finished"]
+[connection signal="finished" from="RunningSound" to="RunningSound" method="_on_finished"]
+[connection signal="finished" from="WierdRunningSound" to="." method="_on_running_sound_finished"]
+[connection signal="finished" from="WierdRunningSound" to="WierdRunningSound" method="_on_finished"]

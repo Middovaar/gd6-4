@@ -13,7 +13,7 @@ func _process(delta):
 
 func _on_main_menu_start_game():
 	get_child(0).queue_free()
-	NextLevel = preload("res://GD1/base.tscn").instantiate() 	
+	NextLevel = preload("res://GD1/GD1Base.tscn").instantiate() 	
 	add_child(NextLevel) #Adds the new level as a child
 	NextLevel = $Base
 	if NextLevel == $Base and NextLevel != null:

@@ -1,0 +1,304 @@
+[gd_scene load_steps=30 format=3 uid="uid://dkvvtl1aarrdt"]
+
+[ext_resource type="Texture2D" uid="uid://btlxo1n6tpds0" path="res://GD4/Sprites/apartment.png" id="1_i6lrt"]
+[ext_resource type="Script" path="res://GD4/Scripts/Apartment.gd" id="2_atg3l"]
+[ext_resource type="Script" path="res://GD4/Scripts/ComputerLights.gd" id="3_nu1qc"]
+[ext_resource type="Script" path="res://GD4/Scripts/ApartmentCharacter.gd" id="4_100r5"]
+[ext_resource type="Texture2D" uid="uid://rv37b2fp7ft7" path="res://GD4/Sprites/ComputerScreen.png" id="4_l5mkq"]
+[ext_resource type="Texture2D" uid="uid://32678asbadrm" path="res://GD4/Sprites/guy.png" id="5_ffxbt"]
+[ext_resource type="Texture2D" uid="uid://cosckvvs1adgh" path="res://GD4/Sprites/W_Key_Light.png" id="6_snsiy"]
+[ext_resource type="Texture2D" uid="uid://dkapmm8laoa5r" path="res://GD4/Sprites/guyLeft2.png" id="7_d2fu1"]
+[ext_resource type="Script" path="res://GD4/Scripts/Music.gd" id="7_wcoeb"]
+[ext_resource type="AudioStream" uid="uid://du3wg4vqfvvc3" path="res://GD4/Music/1StPeriodRoomSoundHiPass.wav" id="8_rrl0t"]
+[ext_resource type="Texture2D" uid="uid://cuo7t225se4un" path="res://GD4/Sprites/guyLeft1.png" id="8_vwhwl"]
+[ext_resource type="Texture2D" uid="uid://430dopecdrb0" path="res://GD4/Sprites/guyLeft3.png" id="9_rbgak"]
+[ext_resource type="Texture2D" uid="uid://dy85t4belvs50" path="res://GD4/Sprites/guyRight2.png" id="10_3dmlf"]
+[ext_resource type="Texture2D" uid="uid://b457jkp2jt02s" path="res://GD4/Sprites/guyRight1.png" id="11_aea7s"]
+[ext_resource type="Texture2D" uid="uid://dqie3nm8ntiba" path="res://GD4/Sprites/guyRight3.png" id="12_7eqbi"]
+[ext_resource type="Texture2D" uid="uid://d1ghuhu35m78q" path="res://GD4/Sprites/textbox.png" id="15_1kh8r"]
+[ext_resource type="FontFile" uid="uid://bwim6iqv6ytje" path="res://GD1/Sprites/Font/motaiwan.ttf" id="16_3ha62"]
+[ext_resource type="Script" path="res://GD4/Scripts/DialogueBoxBase.gd" id="16_lu1p2"]
+[ext_resource type="Texture2D" uid="uid://0qpi8ru3nmgu" path="res://GD4/Sprites/guypfp.png" id="17_lgdkj"]
+
+[sub_resource type="Gradient" id="Gradient_6bcs5"]
+offsets = PackedFloat32Array(0, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0mnjj"]
+gradient = SubResource("Gradient_6bcs5")
+fill = 1
+fill_from = Vector2(0.504587, 0.518349)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tv6"]
+size = Vector2(32, 298)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0qkuf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vecqe"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nbi70"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhux8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ffxbt")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Sitting",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_vwhwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d2fu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rbgak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d2fu1")
+}],
+"loop": true,
+"name": &"WalkingLeft",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_aea7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3dmlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7eqbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3dmlf")
+}],
+"loop": true,
+"name": &"WalkingRight",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64b71"]
+size = Vector2(198, 643)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsg55"]
+size = Vector2(402, 1091)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bcl0"]
+size = Vector2(521, 1219)
+
+[node name="Gd4Base" type="Node2D"]
+
+[node name="ApartmentBackground" type="StaticBody2D" parent="."]
+
+[node name="Apartment" type="Sprite2D" parent="ApartmentBackground"]
+position = Vector2(2850, 539.105)
+scale = Vector2(20.2, 20.2)
+texture = ExtResource("1_i6lrt")
+script = ExtResource("2_atg3l")
+metadata/_edit_lock_ = true
+
+[node name="PointLight2D2" type="PointLight2D" parent="ApartmentBackground/Apartment"]
+position = Vector2(-84.5545, -0.500244)
+scale = Vector2(0.365099, 0.383277)
+color = Color(0, 0.984314, 0.415686, 1)
+energy = 0.72
+texture = SubResource("GradientTexture2D_0mnjj")
+script = ExtResource("3_nu1qc")
+
+[node name="PointLight2D3" type="PointLight2D" parent="ApartmentBackground/Apartment"]
+position = Vector2(-82.4753, -0.549751)
+scale = Vector2(0.365099, 0.383277)
+color = Color(0, 0.984314, 0.415686, 1)
+energy = 0.72
+texture = SubResource("GradientTexture2D_0mnjj")
+
+[node name="MusicTracker" type="Sprite2D" parent="ApartmentBackground/Apartment"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-89.802, 9.59876)
+scale = Vector2(0.00226898, 0.00226898)
+texture = ExtResource("4_l5mkq")
+
+[node name="ApartmentInteractables" type="Area2D" parent="ApartmentBackground/Apartment"]
+unique_name_in_owner = true
+position = Vector2(-141.089, -26.6884)
+scale = Vector2(0.049505, 0.049505)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(136, 767)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(565, 827)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(1166, 637)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(2515, 709)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(3002, 710)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(3312, 713)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(4057, 666)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(4378, 774)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(4710, 727)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="ApartmentBackground/Apartment/ApartmentInteractables"]
+position = Vector2(5410, 763)
+shape = SubResource("RectangleShape2D_u6tv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ApartmentBackground"]
+position = Vector2(-0.000244141, 1080)
+shape = SubResource("WorldBoundaryShape2D_0qkuf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ApartmentBackground"]
+position = Vector2(-468, 0)
+shape = SubResource("WorldBoundaryShape2D_vecqe")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ApartmentBackground"]
+position = Vector2(2777, -1)
+shape = SubResource("WorldBoundaryShape2D_nbi70")
+
+[node name="Character" type="CharacterBody2D" parent="."]
+position = Vector2(-57, -3)
+collision_mask = 3
+safe_margin = 0.02
+script = ExtResource("4_100r5")
+
+[node name="Interactable" type="Sprite2D" parent="Character"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1607, 280)
+texture = ExtResource("6_snsiy")
+
+[node name="Guy" type="AnimatedSprite2D" parent="Character"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(1610, 739)
+scale = Vector2(18, 18)
+sprite_frames = SubResource("SpriteFrames_rhux8")
+animation = &"WalkingLeft"
+
+[node name="CharacterCollider" type="CollisionShape2D" parent="Character"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(1610, 754.5)
+shape = SubResource("RectangleShape2D_64b71")
+
+[node name="Teleporters" type="Area2D" parent="."]
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Left" type="CollisionShape2D" parent="Teleporters"]
+position = Vector2(-480, 537)
+shape = SubResource("RectangleShape2D_fsg55")
+
+[node name="Right" type="CollisionShape2D" parent="Teleporters"]
+position = Vector2(2418, 536)
+shape = SubResource("RectangleShape2D_3bcl0")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Music" type="Node2D" parent="Sounds"]
+script = ExtResource("7_wcoeb")
+
+[node name="FirstPeriod" type="AudioStreamPlayer2D" parent="Sounds/Music"]
+position = Vector2(1035, 730)
+stream = ExtResource("8_rrl0t")
+volume_db = -10.0
+autoplay = true
+
+[node name="TextBox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextBox"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1081.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TextBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.7
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="TextBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.39
+
+[node name="DialogueBoxBase" type="NinePatchRect" parent="TextBox/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("15_1kh8r")
+patch_margin_left = 29
+patch_margin_top = 22
+patch_margin_right = 17
+patch_margin_bottom = 18
+script = ExtResource("16_lu1p2")
+
+[node name="Text" type="RichTextLabel" parent="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 212.0
+offset_top = -179.0
+offset_right = -15.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("16_3ha62")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "This is DebugText"
+
+[node name="Pfp" type="Sprite2D" parent="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase"]
+position = Vector2(101, 101)
+scale = Vector2(8.5, 8.5)
+texture = ExtResource("17_lgdkj")
+
+[connection signal="body_shape_entered" from="ApartmentBackground/Apartment/ApartmentInteractables" to="Character" method="_on_apartment_interactables_interactor"]
+[connection signal="body_shape_exited" from="ApartmentBackground/Apartment/ApartmentInteractables" to="Character" method="_on_apartment_interactables_exited"]
+[connection signal="InteractablesInfo" from="Character" to="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" method="_on_interactables_info"]
+[connection signal="body_shape_entered" from="Teleporters" to="ApartmentBackground/Apartment" method="_on_teleporters_body_shape_entered"]
+[connection signal="body_shape_entered" from="Teleporters" to="Character" method="_on_teleporters_entered"]
+[connection signal="body_shape_entered" from="Teleporters" to="Sounds/Music" method="_on_teleporters_body_shape_entered"]
+[connection signal="finished" from="Sounds/Music/FirstPeriod" to="Sounds/Music" method="_on_first_period_roommusic_finished"]

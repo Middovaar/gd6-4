@@ -49,6 +49,7 @@ animations = [{
 }]
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2(-336, -127)
 script = ExtResource("1_kckfj")
 
 [node name="Start" type="Sprite2D" parent="."]

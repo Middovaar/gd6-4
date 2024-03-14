@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkvvtl1aarrdt"]
+[gd_scene load_steps=37 format=3 uid="uid://dkvvtl1aarrdt"]
 
+[ext_resource type="Script" path="res://GD4/Scripts/GD4Base.gd" id="1_ci7sh"]
 [ext_resource type="Texture2D" uid="uid://btlxo1n6tpds0" path="res://GD4/Sprites/apartment.png" id="1_i6lrt"]
 [ext_resource type="Script" path="res://GD4/Scripts/Apartment.gd" id="2_atg3l"]
 [ext_resource type="Script" path="res://GD4/Scripts/ComputerLights.gd" id="3_nu1qc"]
@@ -9,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cosckvvs1adgh" path="res://GD4/Sprites/W_Key_Light.png" id="6_snsiy"]
 [ext_resource type="Texture2D" uid="uid://dkapmm8laoa5r" path="res://GD4/Sprites/guyLeft2.png" id="7_d2fu1"]
 [ext_resource type="Script" path="res://GD4/Scripts/Music.gd" id="7_wcoeb"]
-[ext_resource type="AudioStream" uid="uid://du3wg4vqfvvc3" path="res://GD4/Music/1StPeriodRoomSoundHiPass.wav" id="8_rrl0t"]
+[ext_resource type="AudioStream" uid="uid://chd374gqv5kw7" path="res://GD4/Music/1StPeriodRoomSoundHiPass_01.ogg" id="8_rrl0t"]
 [ext_resource type="Texture2D" uid="uid://cuo7t225se4un" path="res://GD4/Sprites/guyLeft1.png" id="8_vwhwl"]
 [ext_resource type="Texture2D" uid="uid://430dopecdrb0" path="res://GD4/Sprites/guyLeft3.png" id="9_rbgak"]
 [ext_resource type="Texture2D" uid="uid://dy85t4belvs50" path="res://GD4/Sprites/guyRight2.png" id="10_3dmlf"]
@@ -18,7 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://d1ghuhu35m78q" path="res://GD4/Sprites/textbox.png" id="15_1kh8r"]
 [ext_resource type="FontFile" uid="uid://bwim6iqv6ytje" path="res://GD1/Sprites/Font/motaiwan.ttf" id="16_3ha62"]
 [ext_resource type="Script" path="res://GD4/Scripts/DialogueBoxBase.gd" id="16_lu1p2"]
+[ext_resource type="Script" path="res://GD4/Scripts/SFX.gd" id="17_3qkgj"]
+[ext_resource type="Script" path="res://GD4/Scripts/YesNo.gd" id="17_53tgp"]
 [ext_resource type="Texture2D" uid="uid://0qpi8ru3nmgu" path="res://GD4/Sprites/guypfp.png" id="17_lgdkj"]
+[ext_resource type="AudioStream" uid="uid://bdpfjd67idrlp" path="res://GD4/Music/voice_1.wav" id="18_we5rj"]
+[ext_resource type="Script" path="res://GD4/Scripts/YesFader.gd" id="21_mn24y"]
 
 [sub_resource type="Gradient" id="Gradient_6bcs5"]
 offsets = PackedFloat32Array(0, 0.688312)
@@ -100,7 +105,14 @@ size = Vector2(402, 1091)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bcl0"]
 size = Vector2(521, 1219)
 
+[sub_resource type="Gradient" id="Gradient_idrbl"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jjsta"]
+gradient = SubResource("Gradient_idrbl")
+
 [node name="Gd4Base" type="Node2D"]
+script = ExtResource("1_ci7sh")
 
 [node name="ApartmentBackground" type="StaticBody2D" parent="."]
 
@@ -202,6 +214,7 @@ position = Vector2(1607, 280)
 texture = ExtResource("6_snsiy")
 
 [node name="Guy" type="AnimatedSprite2D" parent="Character"]
+unique_name_in_owner = true
 light_mask = 2
 visibility_layer = 2
 position = Vector2(1610, 739)
@@ -238,6 +251,14 @@ stream = ExtResource("8_rrl0t")
 volume_db = -10.0
 autoplay = true
 
+[node name="SFX" type="Node2D" parent="Sounds"]
+unique_name_in_owner = true
+script = ExtResource("17_3qkgj")
+
+[node name="VoiceSet" type="AudioStreamPlayer" parent="Sounds/SFX"]
+stream = ExtResource("18_we5rj")
+volume_db = -20.0
+
 [node name="TextBox" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -254,7 +275,60 @@ offset_bottom = 1081.0
 [node name="VBoxContainer2" type="VBoxContainer" parent="TextBox/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.7
+size_flags_stretch_ratio = 1.35
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="TextBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.14
+
+[node name="YesNo" type="NinePatchRect" parent="TextBox/VBoxContainer/VBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("15_1kh8r")
+patch_margin_left = 29
+patch_margin_top = 22
+patch_margin_right = 17
+patch_margin_bottom = 18
+script = ExtResource("17_53tgp")
+
+[node name="Yes" type="RichTextLabel" parent="TextBox/VBoxContainer/VBoxContainer4/YesNo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = 13.0
+offset_right = -308.445
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("16_3ha62")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "[center]Yes[/center]"
+
+[node name="No" type="RichTextLabel" parent="TextBox/VBoxContainer/VBoxContainer4/YesNo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 365.0
+offset_top = 11.0
+offset_right = -24.4451
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("16_3ha62")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "[center]No[/center]"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="TextBox/VBoxContainer"]
 layout_mode = 2
@@ -279,7 +353,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 212.0
-offset_top = -179.0
+offset_top = -187.0
 offset_right = -15.0
 offset_bottom = -13.0
 grow_horizontal = 2
@@ -295,10 +369,33 @@ position = Vector2(101, 101)
 scale = Vector2(8.5, 8.5)
 texture = ExtResource("17_lgdkj")
 
+[node name="WKeyLight" type="Sprite2D" parent="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase"]
+position = Vector2(1875, 181)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("6_snsiy")
+
+[node name="Fader" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(958.5, 535)
+scale = Vector2(7.60547, 1150)
+texture = SubResource("GradientTexture1D_jjsta")
+script = ExtResource("21_mn24y")
+
 [connection signal="body_shape_entered" from="ApartmentBackground/Apartment/ApartmentInteractables" to="Character" method="_on_apartment_interactables_interactor"]
 [connection signal="body_shape_exited" from="ApartmentBackground/Apartment/ApartmentInteractables" to="Character" method="_on_apartment_interactables_exited"]
 [connection signal="InteractablesInfo" from="Character" to="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" method="_on_interactables_info"]
+[connection signal="WhenEnteringChair" from="Character" to="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" method="_on_when_entering_chair"]
 [connection signal="body_shape_entered" from="Teleporters" to="ApartmentBackground/Apartment" method="_on_teleporters_body_shape_entered"]
 [connection signal="body_shape_entered" from="Teleporters" to="Character" method="_on_teleporters_entered"]
 [connection signal="body_shape_entered" from="Teleporters" to="Sounds/Music" method="_on_teleporters_body_shape_entered"]
 [connection signal="finished" from="Sounds/Music/FirstPeriod" to="Sounds/Music" method="_on_first_period_roommusic_finished"]
+[connection signal="finished" from="Sounds/SFX/VoiceSet" to="Sounds/SFX" method="_on_voice_set_finished"]
+[connection signal="No" from="TextBox/VBoxContainer/VBoxContainer4/YesNo" to="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" method="_on_YesNo_no"]
+[connection signal="Yes" from="TextBox/VBoxContainer/VBoxContainer4/YesNo" to="Fader" method="_on_yes"]
+[connection signal="InDialogue" from="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" to="Character" method="_in_dialogue"]
+[connection signal="IsInvisible" from="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" to="Sounds/SFX" method="_on_dialogue_box_base_is_invisible"]
+[connection signal="IsVisible" from="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" to="Sounds/SFX" method="_on_dialogue_box_base_is_visible"]
+[connection signal="LeaveBase" from="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" to="Fader" method="_on_dialogue_box_base_leave_base"]
+[connection signal="ShowYesNo" from="TextBox/VBoxContainer/VBoxContainer3/DialogueBoxBase" to="TextBox/VBoxContainer/VBoxContainer4/YesNo" method="_on_show_yes_no"]
+[connection signal="IsBlack" from="Fader" to="Character" method="_on_fader_is_black"]
+[connection signal="IsBlackTransition" from="Fader" to="." method="_on_fader_is_black_transition"]

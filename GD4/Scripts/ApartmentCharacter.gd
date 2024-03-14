@@ -14,6 +14,13 @@ signal InteractablesInfo(IsOverInteractableAndInteractableID)
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+## Dialogue checker
+var IsInADialogue:bool = false
+
+## After the Yes fade-to-black Transition
+var HasFadedToBlack:bool = false
+signal WhenEnteringChair()
+
 func _ready():
 	$Guy.set_animation("Default")
 
@@ -26,7 +33,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("Back", "Forward")
-	if direction:
+	if direction and !IsInADialogue  and !HasFadedToBlack:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -34,17 +41,18 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if Input.is_action_just_pressed("Back") or velocity.x < 0:
-		$Guy.play("WalkingRight") 
+	if !IsInADialogue and !HasFadedToBlack:
+		if Input.is_action_just_pressed("Back") or velocity.x < 0:
+			$Guy.play("WalkingRight") 
 	
-	if Input.is_action_just_pressed("Forward") or velocity.x > 0:
-		$Guy.play("WalkingLeft")
+		if Input.is_action_just_pressed("Forward") or velocity.x > 0:
+			$Guy.play("WalkingLeft")
 	
-	if Input.is_action_just_released("Back") or Input.is_action_just_released("Forward"):
-		$Guy.play("Default")
+		if Input.is_action_just_released("Back") or Input.is_action_just_released("Forward"):
+			$Guy.play("Default")
 	
 	## Interactables
-	if Input.is_action_just_pressed("Jump") and IsOverInteractableAndInteractableID.x != 0:
+	if Input.is_action_just_pressed("Jump") and IsOverInteractableAndInteractableID.x != 0 and !HasFadedToBlack:
 		emit_signal("InteractablesInfo", IsOverInteractableAndInteractableID)
 
 func _on_teleporters_entered(body_rid, body, body_shape_index, local_shape_index):
@@ -66,3 +74,12 @@ func _on_apartment_interactables_interactor(body_rid, body, body_shape_index, lo
 func _on_apartment_interactables_exited(body_rid, body, body_shape_index, local_shape_index):
 	$Interactable.modulate = Color.TRANSPARENT
 	IsOverInteractableAndInteractableID = Vector2i.ZERO
+
+func _in_dialogue(InADialogueRightNow):
+	IsInADialogue = InADialogueRightNow
+
+func _on_fader_is_black():
+	HasFadedToBlack = true
+	$Interactable.visible = false
+	%DialogueBoxBase.modulate = Color.TRANSPARENT
+	emit_signal("WhenEnteringChair")

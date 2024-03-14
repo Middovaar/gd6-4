@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0ctq45djk7yr"]
+
+[ext_resource type="PackedScene" uid="uid://dkvvtl1aarrdt" path="res://GD4/Levels/GD4Base.tscn" id="1_wfphq"]
+
+[node name="MasterRoot" type="Node2D"]
+
+[node name="Gd4Base" parent="." instance=ExtResource("1_wfphq")]

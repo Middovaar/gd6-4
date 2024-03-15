@@ -194,11 +194,13 @@ shape = SubResource("RectangleShape2D_u6tv6")
 position = Vector2(-0.000244141, 1080)
 shape = SubResource("WorldBoundaryShape2D_0qkuf")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ApartmentBackground"]
+[node name="LWorldBorder" type="CollisionShape2D" parent="ApartmentBackground"]
+unique_name_in_owner = true
 position = Vector2(-468, 0)
 shape = SubResource("WorldBoundaryShape2D_vecqe")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="ApartmentBackground"]
+[node name="RWorldBorder" type="CollisionShape2D" parent="ApartmentBackground"]
+unique_name_in_owner = true
 position = Vector2(2777, -1)
 shape = SubResource("WorldBoundaryShape2D_nbi70")
 
@@ -309,6 +311,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("16_3ha62")
+theme_override_fonts/bold_font = ExtResource("16_3ha62")
+theme_override_fonts/italics_font = ExtResource("16_3ha62")
+theme_override_fonts/bold_italics_font = ExtResource("16_3ha62")
 theme_override_font_sizes/normal_font_size = 55
 bbcode_enabled = true
 text = "[center]Yes[/center]"

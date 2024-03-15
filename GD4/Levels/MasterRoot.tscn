@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ctq45djk7yr"]
+[gd_scene load_steps=3 format=3 uid="uid://c0ctq45djk7yr"]
 
+[ext_resource type="Script" path="res://GD4/Scripts/MasterRoot.gd" id="1_mfhjr"]
 [ext_resource type="PackedScene" uid="uid://dkvvtl1aarrdt" path="res://GD4/Levels/GD4Base.tscn" id="1_wfphq"]
 
 [node name="MasterRoot" type="Node2D"]
+script = ExtResource("1_mfhjr")
 
 [node name="Gd4Base" parent="." instance=ExtResource("1_wfphq")]
+
+[connection signal="FirstSectionDone" from="Gd4Base" to="." method="_on_gd_4_base_first_section_done"]

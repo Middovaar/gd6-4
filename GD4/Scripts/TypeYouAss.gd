@@ -1,6 +1,7 @@
 extends Node2D
 
-signal FirstSectionDone()
+signal Score()
+signal Done()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +13,5 @@ func _process(delta):
 	pass
 
 
-func _on_fader_is_black_transition():
-	emit_signal("FirstSectionDone")
+func _on_typer_scorer():
+	emit_signal("Score")

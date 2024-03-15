@@ -1,6 +1,6 @@
 extends Node2D
 
-signal FirstSectionDone()
+@onready var Minigames = preload("res://GD4/Levels/Minigames.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +12,6 @@ func _process(delta):
 	pass
 
 
-func _on_fader_is_black_transition():
-	emit_signal("FirstSectionDone")
+func _on_gd_4_base_first_section_done():
+	$Gd4Base.queue_free()
+	add_child(Minigames)

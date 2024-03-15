@@ -1,3 +1,120 @@
-[gd_scene format=3 uid="uid://c0t18v57ho1ny"]
+[gd_scene load_steps=9 format=3 uid="uid://c0t18v57ho1ny"]
+
+[ext_resource type="Texture2D" uid="uid://rv37b2fp7ft7" path="res://GD4/Sprites/ComputerScreen.png" id="1_6b5ky"]
+[ext_resource type="Script" path="res://GD4/Scripts/Minigames.gd" id="1_r3uwv"]
+[ext_resource type="FontFile" uid="uid://bwim6iqv6ytje" path="res://GD1/Sprites/Font/motaiwan.ttf" id="3_p5gmq"]
+[ext_resource type="Script" path="res://GD4/Scripts/DoThis.gd" id="4_f7xjv"]
+[ext_resource type="Script" path="res://GD4/Scripts/Score.gd" id="5_j20ca"]
+[ext_resource type="Script" path="res://GD4/Scripts/MiniGameMusic.gd" id="6_27p0e"]
+[ext_resource type="AudioStream" uid="uid://chd374gqv5kw7" path="res://GD4/Music/1StPeriodRoomSoundHiPass_01.ogg" id="7_s635k"]
+[ext_resource type="AudioStream" uid="uid://d23aoadl6hh0d" path="res://GD4/Music/keyboard.wav" id="8_ju0lp"]
 
 [node name="Minigames" type="Node2D"]
+script = ExtResource("1_r3uwv")
+
+[node name="ComputerScreen" type="Sprite2D" parent="."]
+position = Vector2(955, 646)
+texture = ExtResource("1_6b5ky")
+metadata/_edit_lock_ = true
+
+[node name="DoThis" type="RichTextLabel" parent="."]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1216.0
+offset_top = 252.0
+offset_right = 2323.0
+offset_bottom = 669.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.307258
+scale = Vector2(0.54147, 0.54147)
+theme_override_fonts/normal_font = ExtResource("3_p5gmq")
+theme_override_font_sizes/normal_font_size = 161
+bbcode_enabled = true
+text = "[center]Code, Code, Code!"
+script = ExtResource("4_f7xjv")
+
+[node name="Score" type="RichTextLabel" parent="."]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1329.0
+offset_top = 648.0
+offset_right = 2436.0
+offset_bottom = 1314.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.446, 0.446)
+theme_override_fonts/normal_font = ExtResource("3_p5gmq")
+theme_override_font_sizes/normal_font_size = 161
+bbcode_enabled = true
+text = "[center][font_size=320]0[/font_size] 
+Codeblocks Finished!"
+script = ExtResource("5_j20ca")
+
+[node name="Clear" type="RichTextLabel" parent="."]
+visible = false
+z_index = 4
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 277.0
+offset_top = 362.0
+offset_right = 1673.0
+offset_bottom = 681.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_p5gmq")
+theme_override_font_sizes/normal_font_size = 236
+bbcode_enabled = true
+text = "[center]Clear!"
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Clear"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -698.0
+offset_top = 64.5
+offset_right = 698.0
+offset_bottom = 159.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_p5gmq")
+theme_override_font_sizes/normal_font_size = 71
+bbcode_enabled = true
+text = "[center]Press W to playtest!"
+
+[node name="Music" type="Node2D" parent="."]
+script = ExtResource("6_27p0e")
+
+[node name="FirstPeriod" type="AudioStreamPlayer2D" parent="Music"]
+position = Vector2(1035, 730)
+stream = ExtResource("7_s635k")
+volume_db = -10.0
+autoplay = true
+
+[node name="KeboardSounds" type="AudioStreamPlayer2D" parent="Music"]
+stream = ExtResource("8_ju0lp")
+volume_db = -10.0
+
+[connection signal="CutMinigameSound" from="." to="Music" method="_on_minigames_cut_minigame_sound"]
+[connection signal="Minigame" from="." to="DoThis" method="_on_minigames"]
+[connection signal="Minigame" from="." to="Score" method="_on_minigames"]
+[connection signal="OnScore" from="." to="Score" method="_on_score"]
+[connection signal="NewGameReq" from="Score" to="." method="_on_typer_new_game_req"]
+[connection signal="finished" from="Music/FirstPeriod" to="Music" method="_on_first_period_finished"]

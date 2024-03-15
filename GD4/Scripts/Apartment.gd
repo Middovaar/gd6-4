@@ -16,16 +16,7 @@ func _process(delta):
 
 
 func _input(event):
-	if Input.is_action_pressed('DebugScreen1'):
-		position.x = ScreenPosition[0]
-		CurrentScreenPosition = 0
-	if Input.is_action_pressed('DebugScreen2'):
-		position.x = ScreenPosition[1]
-		CurrentScreenPosition = 1
-	if Input.is_action_pressed('DebugScreen3'):
-		position.x = ScreenPosition[2]
-		CurrentScreenPosition = 2
-
+	pass
 
 func _on_teleporters_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 
